@@ -53,9 +53,8 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <div className=" flex gap-2 items-center">
-            <p className="flex text-2xl text-red-500 ">
+            <p className="flex text-3xl text-red-500 ">
               <IoMdNotifications />
-              <sup>+0</sup>
             </p>
             <Link to="/login" className=" btn btn-outline btn-primary">
               Join Us
