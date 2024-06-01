@@ -1,20 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
+import { IoMdNotifications } from "react-icons/io";
 
 const Navbar = () => {
   const navbarsItem = (
     <>
-      <li>
-        <NavLink to="/">Item 1</NavLink>
+      <li className="mr-2">
+        <NavLink to="/">Home</NavLink>
       </li>
 
-      <li>
-        <a>Item 3</a>
+      <li className="mr-2">
+        <NavLink to="/meals">Meals</NavLink>
+      </li>
+      <li className="mr-2">
+        <NavLink to="upcomming">Upcoming Meals</NavLink>
       </li>
     </>
   );
   return (
     <div>
-      <div className="navbar">
+      <div className="navbar  bg-slate-200">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -48,9 +52,15 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navbarsItem}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/login" className=" btn btn-outline btn-primary">
-            Join Us
-          </Link>
+          <div className=" flex gap-2 items-center">
+            <p className="flex text-2xl text-red-500 ">
+              <IoMdNotifications />
+              <sup>+0</sup>
+            </p>
+            <Link to="/login" className=" btn btn-outline btn-primary">
+              Join Us
+            </Link>
+          </div>
         </div>
       </div>
     </div>
