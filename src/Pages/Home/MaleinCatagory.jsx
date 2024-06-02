@@ -1,11 +1,18 @@
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
+import LogingSpiner from "../../Sheare/LogingSpiner";
 
 const MaleinCatagory = () => {
-  useEffect(() => {
-    fetch("http://localhost:5000/meals")
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  }, []);
+  const axiosSeequr = useAxiosSecqur();
+  const { data: meals = [], isLoading } = useQuery({
+    queryKey: ["meals"],
+    queryFn: async () => {
+      const { data } = await axiosSeequr.get("/meals");
+      return data;
+    },
+  });
+  if (isLoading) return <LogingSpiner></LogingSpiner>;
+
   return <div></div>;
 };
 
