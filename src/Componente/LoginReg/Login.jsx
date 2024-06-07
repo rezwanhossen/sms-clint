@@ -1,10 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Social from "./Social";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
+  const { login } = useAuth();
+  const naviget = useNavigate();
+  const location = useLocation();
+  const from = location?.state || "/";
+
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    try {
+      await login(email, password);
+      naviget(from);
+      toast.success(" Login successful !");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
   return (
     <div className="w-full md:w-3/4 mx-auto p-4">
       <div className="md:flex gap-3 ">

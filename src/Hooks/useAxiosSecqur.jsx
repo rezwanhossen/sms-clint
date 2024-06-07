@@ -1,30 +1,43 @@
+import { async } from "@firebase/util";
 import axios from "axios";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 export const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
+  // withCredentials: true,
 });
 const useAxiosSecqur = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
-  useEffect(() => {
-    axiosSecure.interceptors.response.use(
-      (res) => {
-        return res;
-      },
-      async (error) => {
-        console.log("error tracked in the interceptor", error.response);
-        if (error.response.status === 401 || error.response.status === 403) {
-          await logout();
-          navigate("/login");
-        }
-        return Promise.reject(error);
+
+  axiosSecure.interceptors.request.use(
+    function (config) {
+      const token = localStorage.getItem("access-token");
+      //console.log("req stop", token);
+      config.headers.authorization = `Berer ${token}`;
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+
+  axiosSecure.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    async (err) => {
+      const status = err.response.status;
+      //console.log("stta erroe", error);
+      if (status === 401 || status === 403) {
+        await logout();
+        navigate("/login");
       }
-    );
-  }, [logout, navigate]);
+      return Promise.reject(err);
+    }
+  );
 
   return axiosSecure;
 };
