@@ -1,13 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import LogingSpiner from "../../Sheare/LogingSpiner";
 import AddUpcoming from "./AddUpcoming";
 
 const Upcommingmeal = () => {
   let [isOpen, setIsOpen] = useState(false);
   const axioscommon = useAxiosCommon();
-  const { data: upcommingmeals = [], isLoading } = useQuery({
+  const axiosSec = useAxiosSecqur();
+  const {
+    data: upcommingmeals = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["upcommingmeals"],
     queryFn: async () => {
       const { data } = await axioscommon.get("/upcommingmeals");
@@ -16,7 +24,36 @@ const Upcommingmeal = () => {
   });
 
   const handelPublic = (upcom) => {
-    console.log(upcom);
+    const items = {
+      title: upcom?.title,
+      catagory: upcom?.catagory,
+      price: parseFloat(upcom?.price),
+      rating: parseFloat(upcom?.rating),
+      likes: parseFloat(upcom?.likes),
+      ingredients: upcom?.ingredients,
+      description: upcom?.description,
+      admin_name: upcom?.admin_name,
+      email: upcom?.email,
+    };
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "you punlish thid item",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSec.delete(`/upcommingmeals/${upcom?._id}`);
+        const posts = await axiosSec.post("/addmeals", items);
+        if (posts.data.insertedId) {
+          toast.success("publish successfully !");
+        }
+      }
+      refetch();
+    });
   };
 
   if (isLoading) return <LogingSpiner></LogingSpiner>;

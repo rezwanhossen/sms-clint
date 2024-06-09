@@ -18,7 +18,7 @@ const MealsDetails = () => {
   return (
     <div>
       <h1 className="text-3xl md:text-5xl font-bold">{title} </h1>
-      <img src={image} alt="" />
+      <img className=" w-[500px]" src={image} alt="" />
     </div>
   );
 };

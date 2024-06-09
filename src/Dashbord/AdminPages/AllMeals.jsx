@@ -49,7 +49,7 @@ const AllMeals = () => {
                   </Link>
                 </td>
                 <td>
-                  <Link>
+                  <Link to={`/dashbord/vievdetial/${meal._id}`}>
                     <button className="btn btn-outline btn-primary">
                       View Deatils
                     </button>

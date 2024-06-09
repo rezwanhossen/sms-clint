@@ -8,6 +8,7 @@ import Addmeal from "../Dashbord/AdminPages/Addmeal";
 import AllMeals from "../Dashbord/AdminPages/AllMeals";
 import Allusers from "../Dashbord/AdminPages/Allusers";
 import Upcommingmeal from "../Dashbord/AdminPages/Upcommingmeal";
+import ViewDeteal from "../Dashbord/AdminPages/ViewDeteal";
 import UserProfil from "../Dashbord/UserProfil";
 import ErrorPage from "../Pages/ErrorPage";
 import Dashboard from "../Root/Dashboard";
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: "allmeals",
         element: <AllMeals></AllMeals>,
+      },
+      {
+        path: "vievdetial/:id",
+        element: <ViewDeteal></ViewDeteal>,
       },
     ],
   },
