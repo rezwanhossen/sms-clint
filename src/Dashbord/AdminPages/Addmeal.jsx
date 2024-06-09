@@ -43,8 +43,8 @@ const Addmeal = () => {
         ingredients: [itm1, itm2, itm3, itm4],
         image: res.data.data.display_url,
         description,
-        admin_name: user.displayName,
-        email: user.email,
+        admin_name: user?.displayName,
+        email: user?.email,
       };
       const menuRes = await axiosSec.post("/addmeals", mealItem);
 
