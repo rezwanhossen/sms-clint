@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <div className=" md:flex">
       {/* side bar */}
-      <div className=" w-64 min-h-screen bg-orange-500">
+      <div className="  md:w-64 min-h-screen bg-orange-500">
         <ul className=" menu space-y-3">
           {isAdmin ? (
             <>
@@ -20,7 +20,7 @@ const Dashboard = () => {
                 <NavLink to="/dashbord/addmeal">Add Meal</NavLink>
               </li>
               <li>
-                <NavLink>All Meals</NavLink>
+                <NavLink to="/dashbord/allmeals">All Meals</NavLink>
               </li>
               <li>
                 <NavLink>All Reviews</NavLink>
@@ -29,7 +29,7 @@ const Dashboard = () => {
                 <NavLink>Serve Meals</NavLink>
               </li>
               <li>
-                <NavLink>Upcoming Meals</NavLink>
+                <NavLink to="/dashbord/upcommingmeal">Upcoming Meals</NavLink>
               </li>
             </>
           ) : (

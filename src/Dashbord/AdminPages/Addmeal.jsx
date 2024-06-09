@@ -1,9 +1,62 @@
-import React from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 
+const imgHosting_api = `https://api.imgbb.com/1/upload?key=${
+  import.meta.env.VITE_IMGBB_key
+}`;
 const Addmeal = () => {
+  const { user } = useAuth();
+  const axiospub = useAxiosCommon();
+  const axiosSec = useAxiosSecqur();
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = async (data) => {
+    const {
+      title,
+      catagory,
+      price,
+      rating,
+      likes,
+      itm1,
+      itm2,
+      itm3,
+      itm4,
+      image,
+      description,
+    } = data;
+    const imageFile = { image: data.image[0] };
+    const res = await axiospub.post(imgHosting_api, imageFile, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (res.data.success) {
+      const mealItem = {
+        title,
+        catagory,
+        price: parseFloat(price),
+        rating: parseFloat(rating),
+        likes: parseFloat(likes),
+        ingredients: [itm1, itm2, itm3, itm4],
+        image: res.data.data.display_url,
+        description,
+        admin_name: user.displayName,
+        email: user.email,
+      };
+      const menuRes = await axiosSec.post("/addmeals", mealItem);
+
+      if (menuRes.data.insertedId) {
+        toast.success("add successfully !");
+      }
+    }
+  };
   return (
     <div>
-      <form>
+      <h2 className="text-3xl font-bold my-5 text-center">Add Meal</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid md:grid-cols-2 gap-3">
           <div>
             <label>Meal Title</label>
@@ -11,7 +64,9 @@ const Addmeal = () => {
               type="text"
               className=" input input-disabled w-full"
               name=""
+              {...register("title")}
               id=""
+              required
             />
           </div>
 
@@ -21,6 +76,8 @@ const Addmeal = () => {
               className=" input input-disabled w-full"
               id="meal"
               name="catagory"
+              {...register("catagory")}
+              required
             >
               <option value="breakfast">Breakfast</option>
               <option value="lunch">Lunch</option>
@@ -34,6 +91,8 @@ const Addmeal = () => {
               type="number"
               className=" input input-disabled w-full"
               name="price"
+              {...register("price")}
+              required
               id=""
             />
           </div>
@@ -42,8 +101,10 @@ const Addmeal = () => {
             <label>Meal Rating</label>
             <input
               type="number"
+              required
               className=" input input-disabled w-full"
               name="rating"
+              {...register("rating")}
               id=""
             />
           </div>
@@ -54,9 +115,23 @@ const Addmeal = () => {
               type="number"
               className=" input input-disabled w-full"
               name=" likes"
+              {...register("likes")}
+              required
               id=""
             />
           </div>
+
+          {/* <div>
+            <label> reviews</label>
+            <input
+              type="text"
+              className=" input input-disabled w-full"
+              name=" review"
+              {...register("reviews")}
+              id=""
+              required
+            />
+          </div> */}
 
           <div>
             <label>ingredients</label>
@@ -65,31 +140,41 @@ const Addmeal = () => {
                 type="text"
                 className=" input input-disabled w-full"
                 name=" itm1"
+                {...register("itm1")}
                 id=""
+                required
               />
               <input
                 type="text"
                 className=" input input-disabled w-full"
                 name=" itm2"
+                required
+                {...register("itm2")}
                 id=""
               />
               <input
                 type="text"
                 className=" input input-disabled w-full"
                 name=" itm3"
+                {...register("itm3")}
                 id=""
               />
               <input
                 type="text"
                 className=" input input-disabled w-full"
                 name=" itm4"
+                {...register("itm4")}
                 id=""
               />
             </div>
           </div>
 
           <div>
-            <input type="file" name="" id="" />
+            <input
+              type="file"
+              className="file-input file-input-bordered file-input-secondary w-full max-w-xs"
+              {...register("image")}
+            />
           </div>
         </div>
         <div>
@@ -97,7 +182,9 @@ const Addmeal = () => {
           <textarea
             className=" input input-disabled w-full"
             name=""
+            {...register("description")}
             id=""
+            required
             cols="30"
             rows="50"
           ></textarea>

@@ -1,10 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRout from "../Componente/Firbase/PrivateRout";
 import Home from "../Componente/Home";
 import Login from "../Componente/LoginReg/Login";
 import Register from "../Componente/LoginReg/Register";
 import Meals from "../Componente/Meals/Meals";
 import Addmeal from "../Dashbord/AdminPages/Addmeal";
+import AllMeals from "../Dashbord/AdminPages/AllMeals";
 import Allusers from "../Dashbord/AdminPages/Allusers";
+import Upcommingmeal from "../Dashbord/AdminPages/Upcommingmeal";
 import UserProfil from "../Dashbord/UserProfil";
 import ErrorPage from "../Pages/ErrorPage";
 import Dashboard from "../Root/Dashboard";
@@ -41,7 +44,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashbord",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRout>
+        <Dashboard></Dashboard>
+      </PrivateRout>
+    ),
     children: [
       {
         path: "userpro",
@@ -55,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: "addmeal",
         element: <Addmeal></Addmeal>,
+      },
+      {
+        path: "upcommingmeal",
+        element: <Upcommingmeal></Upcommingmeal>,
+      },
+      {
+        path: "allmeals",
+        element: <AllMeals></AllMeals>,
       },
     ],
   },
