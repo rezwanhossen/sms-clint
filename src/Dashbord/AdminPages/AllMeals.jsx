@@ -5,18 +5,42 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const AllMeals = () => {
   const axioscommon = useAxiosCommon();
   const axiosSec = useAxiosSecqur();
-  const { data: meals = [], isLoading } = useQuery({
+  const {
+    data: meals = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["meals"],
     queryFn: async () => {
       const { data } = await axioscommon.get("/meals");
       return data;
     },
   });
-  const handeldelet = (id) => {};
+  const handeldelet = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "you punlish thid item",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSec.delete(`/mealdelet/${id}`);
+        if (res.data.deletedCount > 0) {
+          toast.success("deleted successfully !");
+        }
+      }
+      refetch();
+    });
+  };
 
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (

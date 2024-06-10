@@ -5,6 +5,7 @@ import Login from "../Componente/LoginReg/Login";
 import Register from "../Componente/LoginReg/Register";
 import Meals from "../Componente/Meals/Meals";
 import Addmeal from "../Dashbord/AdminPages/Addmeal";
+import AdminProfil from "../Dashbord/AdminPages/AdminProfil";
 import AllMeals from "../Dashbord/AdminPages/AllMeals";
 import Allusers from "../Dashbord/AdminPages/Allusers";
 import Upcommingmeal from "../Dashbord/AdminPages/Upcommingmeal";
@@ -44,7 +45,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/upcommeal",
-        element: <UpcomMeal></UpcomMeal>,
+        element: (
+          <PrivateRout>
+            {" "}
+            <UpcomMeal></UpcomMeal>
+          </PrivateRout>
+        ),
       },
     ],
   },
@@ -80,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "vievdetial/:id",
         element: <ViewDeteal></ViewDeteal>,
+      },
+      {
+        path: "adminProfil",
+        element: <AdminProfil></AdminProfil>,
       },
     ],
   },

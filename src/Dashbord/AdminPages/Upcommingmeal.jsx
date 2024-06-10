@@ -46,7 +46,7 @@ const Upcommingmeal = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, Publish!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSec.delete(`/upcommingmeals/${upcom?._id}`);

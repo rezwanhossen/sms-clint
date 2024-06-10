@@ -174,6 +174,7 @@ const AddUpcoming = ({ isOpen, setisOpen, refetch }) => {
                               type="text"
                               className=" input input-disabled w-full"
                               name=" itm3"
+                              required
                               {...register("itm3")}
                               id=""
                             />
@@ -181,6 +182,7 @@ const AddUpcoming = ({ isOpen, setisOpen, refetch }) => {
                               type="text"
                               className=" input input-disabled w-full"
                               name=" itm4"
+                              required
                               {...register("itm4")}
                               id=""
                             />

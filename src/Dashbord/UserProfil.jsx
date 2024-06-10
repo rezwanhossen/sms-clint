@@ -16,16 +16,17 @@ const UserProfil = () => {
   return (
     <div className=" md:w-2/4 mx-auto">
       <div className=" flex justify-center">
-        <div>
+        <div className="space-y-3">
           <img
             className=" w-40 h-40 rounded-full border-2"
             src={user?.photoURL}
             alt=""
           />
-
-          <p className={`text-2xl `}>{useron?.badge}</p>
-          <p>{user?.displayName}</p>
-          <p>{user?.email}</p>
+          <p className={`text-2xl p-2 bg-orange-500 rounded-lg text-center `}>
+            {useron?.badge}{" "}
+          </p>
+          <p className="text-4xl font-bold">Name: {user?.displayName}</p>
+          <p>Email: {user?.email}</p>
         </div>
       </div>
     </div>
