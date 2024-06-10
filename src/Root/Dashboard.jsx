@@ -27,7 +27,7 @@ const Dashboard = () => {
                 <NavLink>All Reviews</NavLink>
               </li>
               <li>
-                <NavLink>Serve Meals</NavLink>
+                <NavLink to="/dashbord/servicmeal">Serve Meals</NavLink>
               </li>
               <li>
                 <NavLink to="/dashbord/upcommingmeal">Upcoming Meals</NavLink>
@@ -40,7 +40,7 @@ const Dashboard = () => {
                 <NavLink to="/dashbord/userpro">My Profile</NavLink>
               </li>
               <li>
-                <NavLink to="">Requested Meals</NavLink>
+                <NavLink to="/dashbord/userRequstMeal">Requested Meals</NavLink>
               </li>
               <li>
                 <NavLink>My Reviews</NavLink>

@@ -23,7 +23,7 @@ const UserProfil = () => {
             alt=""
           />
           <p className={`text-2xl p-2 bg-orange-500 rounded-lg text-center `}>
-            {useron?.badge}{" "}
+            {useron.badge}
           </p>
           <p className="text-4xl font-bold">Name: {user?.displayName}</p>
           <p>Email: {user?.email}</p>

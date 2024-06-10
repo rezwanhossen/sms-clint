@@ -8,9 +8,12 @@ import Addmeal from "../Dashbord/AdminPages/Addmeal";
 import AdminProfil from "../Dashbord/AdminPages/AdminProfil";
 import AllMeals from "../Dashbord/AdminPages/AllMeals";
 import Allusers from "../Dashbord/AdminPages/Allusers";
+import ServicMeal from "../Dashbord/AdminPages/ServicMeal";
 import Upcommingmeal from "../Dashbord/AdminPages/Upcommingmeal";
 import ViewDeteal from "../Dashbord/AdminPages/ViewDeteal";
+import Payment from "../Dashbord/Payment";
 import UserProfil from "../Dashbord/UserProfil";
+import UserRequstmeal from "../Dashbord/UserRequstmeal";
 import ErrorPage from "../Pages/ErrorPage";
 import UpcomMeal from "../Pages/Home/UpcomMeal";
 import Dashboard from "../Root/Dashboard";
@@ -66,11 +69,20 @@ const router = createBrowserRouter([
         path: "userpro",
         element: <UserProfil></UserProfil>,
       },
+      {
+        path: "userRequstMeal",
+        element: <UserRequstmeal></UserRequstmeal>,
+      },
+      {
+        path: "payment/:id",
+        element: <Payment></Payment>,
+      },
       //admin route
       {
         path: "users",
         element: <Allusers></Allusers>,
       },
+
       {
         path: "addmeal",
         element: <Addmeal></Addmeal>,
@@ -90,6 +102,10 @@ const router = createBrowserRouter([
       {
         path: "adminProfil",
         element: <AdminProfil></AdminProfil>,
+      },
+      {
+        path: "servicmeal",
+        element: <ServicMeal></ServicMeal>,
       },
     ],
   },

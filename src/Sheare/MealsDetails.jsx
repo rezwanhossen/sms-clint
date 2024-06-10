@@ -4,6 +4,7 @@ import useAxiosCommon from "../Hooks/useAxiosCommon";
 import LogingSpiner from "./LogingSpiner";
 import { AiFillLike } from "react-icons/ai";
 import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 const MealsDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
@@ -31,6 +32,39 @@ const MealsDetails = () => {
       naviget("/login");
     }
   };
+
+  const { data: useron = {} } = useQuery({
+    queryKey: ["useron", user?.email],
+    queryFn: async () => {
+      const { data } = await axioscommon.get(`/useron/${user.email}`);
+      return data;
+    },
+  });
+
+  const handelRequest = async (meal, useron) => {
+    if (
+      user &&
+      (useron.badge == "silver" ||
+        useron.badge == "gold" ||
+        useron.badge == "platinum")
+    ) {
+      const requstmel = {
+        title: meal?.title,
+        status: " pending",
+        likes: meal?.likes,
+        mealId: meal?._id,
+        user: user?.displayName,
+        userEmail: user?.email,
+      };
+      const res = await axioscommon.post("/requstmeal", requstmel);
+      if (res.data.insertedId) {
+        toast.success("Request successfully !");
+      }
+    } else {
+      naviget("/login");
+    }
+  };
+
   if (isLoading) return <LogingSpiner></LogingSpiner>;
 
   return (
@@ -79,7 +113,10 @@ const MealsDetails = () => {
                 <li key={inx}> {itm}</li>
               ))} */}
             </p>
-            <button className=" btn btn-outline btn-primary">
+            <button
+              onClick={() => handelRequest(meal, useron)}
+              className=" btn btn-outline btn-primary"
+            >
               Meal Request
             </button>
             <div className=" my-10">

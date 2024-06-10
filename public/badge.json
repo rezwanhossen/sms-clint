@@ -1,0 +1,17 @@
+[
+  {
+    "price": 200,
+    "badge": "Platinum",
+    "badgeImg": "https://i.ibb.co/C27Wgv4/download-2.jpg"
+  },
+  {
+    "price": 300,
+    "badge": "gold",
+    "badgeImg": "https://i.ibb.co/MC3VxDp/download-4.jpg"
+  },
+  {
+    "price": 150,
+    "badge": "silver",
+    "badgeImg": "https://i.ibb.co/nLqwdg1/download-3.jpg"
+  }
+]
