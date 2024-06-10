@@ -3,6 +3,7 @@ import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
+
   return (
     <div className=" md:flex">
       {/* side bar */}
@@ -57,7 +58,7 @@ const Dashboard = () => {
             <NavLink to="/meals">Meals</NavLink>
           </li>
           <li>
-            <NavLink to="upcomming">Upcoming Meals</NavLink>
+            <NavLink to="/upcommeal">Upcoming Meals</NavLink>
           </li>
         </ul>
       </div>

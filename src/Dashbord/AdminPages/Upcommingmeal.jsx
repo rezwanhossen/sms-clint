@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import moment from "moment";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import LogingSpiner from "../../Sheare/LogingSpiner";
@@ -29,7 +30,9 @@ const Upcommingmeal = () => {
       catagory: upcom?.catagory,
       price: parseFloat(upcom?.price),
       rating: parseFloat(upcom?.rating),
-      likes: parseFloat(upcom?.likes),
+      likes: upcom?.likes,
+      image: upcom?.image,
+      post_time: moment().format("LLLL"),
       ingredients: upcom?.ingredients,
       description: upcom?.description,
       admin_name: upcom?.admin_name,
@@ -68,7 +71,11 @@ const Upcommingmeal = () => {
         </div>
       </div>
       <div>
-        <AddUpcoming isOpen={isOpen} setisOpen={setIsOpen}></AddUpcoming>
+        <AddUpcoming
+          isOpen={isOpen}
+          setisOpen={setIsOpen}
+          refetch={refetch}
+        ></AddUpcoming>
       </div>
       <div>
         <div className="overflow-x-auto">

@@ -4,9 +4,11 @@ import LogingSpiner from "../../Sheare/LogingSpiner";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 
 const AllMeals = () => {
   const axioscommon = useAxiosCommon();
+  const axiosSec = useAxiosSecqur();
   const { data: meals = [], isLoading } = useQuery({
     queryKey: ["meals"],
     queryFn: async () => {
@@ -14,6 +16,7 @@ const AllMeals = () => {
       return data;
     },
   });
+  const handeldelet = (id) => {};
 
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
@@ -41,7 +44,7 @@ const AllMeals = () => {
                 <td>Blue</td>
                 <td>{meal.admin_name}</td>
                 <td className=" flex gap-2">
-                  <button className="btn">
+                  <button onClick={() => handeldelet(meal._id)} className="btn">
                     <MdDelete></MdDelete>{" "}
                   </button>
                   <Link className="btn">

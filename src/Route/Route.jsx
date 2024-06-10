@@ -11,6 +11,7 @@ import Upcommingmeal from "../Dashbord/AdminPages/Upcommingmeal";
 import ViewDeteal from "../Dashbord/AdminPages/ViewDeteal";
 import UserProfil from "../Dashbord/UserProfil";
 import ErrorPage from "../Pages/ErrorPage";
+import UpcomMeal from "../Pages/Home/UpcomMeal";
 import Dashboard from "../Root/Dashboard";
 import Root from "../Root/Root";
 import MealsDetails from "../Sheare/MealsDetails";
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/mealdetail/:id",
         element: <MealsDetails></MealsDetails>,
+      },
+      {
+        path: "/upcommeal",
+        element: <UpcomMeal></UpcomMeal>,
       },
     ],
   },

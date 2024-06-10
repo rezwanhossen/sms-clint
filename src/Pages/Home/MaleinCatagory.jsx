@@ -22,15 +22,9 @@ const MaleinCatagory = () => {
   });
   if (isLoading) return <LogingSpiner></LogingSpiner>;
 
-  const breackfast = meals.filter(
-    (item) => item.category == "Breakfast" || item.category == "breakfast"
-  );
-  const lunce = meals.filter(
-    (item) => item.category == "Lunch" || item.category == "lunch"
-  );
-  const denner = meals.filter(
-    (item) => item.category == "Dinner" || item.category == "Dinner"
-  );
+  const breackfast = meals.filter((item) => item.catagory == "breakfast");
+  const lunce = meals.filter((item) => item.catagory === "lunch");
+  const denner = meals.filter((item) => item.catagory == "dinner");
 
   return (
     <div className=" mt-10 mb-10">

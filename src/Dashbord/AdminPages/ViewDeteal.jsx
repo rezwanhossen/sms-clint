@@ -33,9 +33,13 @@ const ViewDeteal = () => {
             <p>rating: {meal.rating}</p>
             <p>
               ingredients:
-              {meal.ingredients.map((itm, inx) => (
+              <li>{meal.ingredients?.itm1}</li>
+              <li>{meal.ingredients?.itm2}</li>
+              <li>{meal.ingredients?.itm3}</li>
+              <li>{meal.ingredients?.itm4}</li>
+              {/* {meal.ingredients.map((itm, inx) => (
                 <li key={inx}>{itm} </li>
-              ))}
+              ))} */}
             </p>
             <p>Proviser: {meal.admin_name}</p>
             <p>Email: {meal.email}</p>

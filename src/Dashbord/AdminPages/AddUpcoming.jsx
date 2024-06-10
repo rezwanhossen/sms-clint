@@ -6,6 +6,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
+import moment from "moment";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
@@ -14,7 +15,7 @@ import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 const imgHosting_api = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMGBB_key
 }`;
-const AddUpcoming = ({ isOpen, setisOpen }) => {
+const AddUpcoming = ({ isOpen, setisOpen, refetch }) => {
   const { user } = useAuth();
   const axiosPub = useAxiosCommon();
   const axiosSec = useAxiosSecqur();
@@ -47,9 +48,10 @@ const AddUpcoming = ({ isOpen, setisOpen }) => {
         price: parseFloat(price),
         rating: parseFloat(rating),
         likes: parseFloat(likes),
-        ingredients: [itm1, itm2, itm3, itm4],
+        ingredients: { itm1, itm2, itm3, itm4 },
         image: res.data.data.display_url,
         description,
+        post_time: moment().format("LLLL"),
         admin_name: user?.displayName,
         email: user?.email,
       };
@@ -58,6 +60,7 @@ const AddUpcoming = ({ isOpen, setisOpen }) => {
       if (menuRes.data.insertedId) {
         toast.success("add upcomming meal successfully !");
       }
+      refetch();
     }
   };
   return (
