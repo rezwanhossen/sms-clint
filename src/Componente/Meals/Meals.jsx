@@ -18,7 +18,7 @@ const Meals = () => {
     queryKey: ["meals", filter, search],
     queryFn: async () => {
       const { data } = await axioscommon.get(
-        `/meals?filter=${filter}&search=${search}`
+        `/all-meals?filter=${filter}&search=${search}`
       );
       return data;
     },
@@ -29,7 +29,7 @@ const Meals = () => {
     const text = e.target.search.value;
     setSearch(text);
   };
-  console.log(search);
+  // console.log(search);
 
   if (isLoading) return <LogingSpiner></LogingSpiner>;
 
@@ -41,6 +41,7 @@ const Meals = () => {
             type="text"
             className=" input input-disabled"
             name="search"
+            placeholder="type meal title.."
             id=""
           />
           <input

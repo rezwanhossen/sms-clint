@@ -3,22 +3,24 @@ import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import LogingSpiner from "../../Sheare/LogingSpiner";
 import Swal from "sweetalert2";
 import { FaUser } from "react-icons/fa";
+import { useState } from "react";
 // import useAxiosCommon from "../../Hooks/useAxiosCommon";
 
 const Allusers = () => {
   const asioxSec = useAxiosSecqur();
+  const [search, setsearch] = useState("");
 
-  const {
-    data: users = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const { data } = await asioxSec.get("/users");
-      return data;
-    },
-  });
+  // const {
+  //   data: users = [],
+  //   isLoading,
+  //   refetch,
+  // } = useQuery({
+  //   queryKey: ["users", search],
+  //   queryFn: async () => {
+  //     const { data } = await asioxSec.get(`/all-users?search=${search}`);
+  //     return data;
+  //   },
+  // });
 
   const handelrol = (id) => {
     asioxSec.patch(`/users/admin/${id}`).then((res) => {
@@ -34,13 +36,37 @@ const Allusers = () => {
       }
     });
   };
+
+  const handelsearch = (e) => {
+    e.preventDefault();
+    const text = e.target.search.value;
+    setsearch(text);
+  };
+
   if (isLoading) return <LogingSpiner></LogingSpiner>;
 
   return (
     <div>
-      <div className=" flex justify-between">
+      <div className=" md:flex justify-between">
         <h2 className="text-3xl">All users</h2>
+
         <h2 className="text-3xl">Total user {users.length}</h2>
+      </div>
+      <div className=" bg-slate-400 p-4 my-6 rouned-md shadow-md ">
+        <form onSubmit={handelsearch} className="flex gap-2">
+          <input
+            type="text"
+            className=" input input-disabled"
+            name="search"
+            placeholder="type meal title.."
+            id=""
+          />
+          <input
+            type="submit"
+            className="btn btn-outline btn-primary"
+            value="Search"
+          />
+        </form>
       </div>
       <div>
         <div className="overflow-x-auto">
