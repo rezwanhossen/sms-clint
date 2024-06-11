@@ -79,7 +79,7 @@ const MealsDetails = () => {
       }
       refetch();
     } else {
-      naviget("/login");
+      toast.error("you are not buy Membership pakag ");
     }
   };
 
@@ -105,6 +105,12 @@ const MealsDetails = () => {
       if (res.data.insertedId) {
         toast.success("revies successfilly !");
       }
+      const reviecCount = reviews?.length + 1;
+      axioscommon.patch(`/reviusCount/${meal._id}`, {
+        reviecCount: reviecCount,
+      });
+
+      refetch();
       refetch();
     } else {
       naviget("/login");
@@ -120,6 +126,15 @@ const MealsDetails = () => {
       naviget("/login");
     }
   };
+
+  // const handelClick = async (id, reviews) => {
+  //   const reviecCount = reviews?.length + 1;
+  //   const res = await axioscommon.patch(`/reviusCount/${id}`, {
+  //     reviecCount: reviecCount,
+  //   });
+  //   console.log(res);
+  //   refetch();
+  // };
 
   if (isLoading) return <LogingSpiner></LogingSpiner>;
 

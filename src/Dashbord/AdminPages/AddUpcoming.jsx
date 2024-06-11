@@ -145,6 +145,8 @@ const AddUpcoming = ({ isOpen, setisOpen, refetch }) => {
                             type="number"
                             className=" input input-disabled w-full"
                             name=" likes"
+                            defaultValue={0}
+                            disabled
                             {...register("likes")}
                             required
                             id=""
