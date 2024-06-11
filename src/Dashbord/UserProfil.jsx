@@ -12,6 +12,13 @@ const UserProfil = () => {
       return data;
     },
   });
+  const { data: payment = {} } = useQuery({
+    queryKey: ["payment", user?.email],
+    queryFn: async () => {
+      const { data } = await axioscommon.get(`/payment/${user.email}`);
+      return data;
+    },
+  });
 
   return (
     <div className=" md:w-2/4 mx-auto">
@@ -23,7 +30,7 @@ const UserProfil = () => {
             alt=""
           />
           <p className={`text-2xl p-2 bg-orange-500 rounded-lg text-center `}>
-            {useron.badge}
+            {payment.badge}
           </p>
           <p className="text-4xl font-bold">Name: {user?.displayName}</p>
           <p>Email: {user?.email}</p>

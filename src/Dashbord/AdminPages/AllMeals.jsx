@@ -25,7 +25,7 @@ const AllMeals = () => {
   const handeldelet = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "you punlish thid item",
+      text: "you deleted thid item",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

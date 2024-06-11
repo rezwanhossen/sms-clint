@@ -4,9 +4,12 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import LogingSpiner from "../../Sheare/LogingSpiner";
 import NoDataHeader from "../../Sheare/NoDataHeader";
-
+import moment from "moment";
+import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
+import toast from "react-hot-toast";
 const UpcomMeal = () => {
   const { user } = useAuth();
+  const axiosSec = useAxiosSecqur();
   const axioscommon = useAxiosCommon();
   const {
     data: upcommingm = [],
@@ -27,8 +30,35 @@ const UpcomMeal = () => {
       return data;
     },
   });
+  const { data: payment = {} } = useQuery({
+    queryKey: ["payment", user?.email],
+    queryFn: async () => {
+      const { data } = await axioscommon.get(`/payment/${user.email}`);
+      return data;
+    },
+  });
 
-  const handelLike = async (id, like) => {
+  const handelLike = async (id, like, items) => {
+    if (like >= 10) {
+      const item = {
+        title: items?.title,
+        catagory: items?.catagory,
+        price: parseFloat(items?.price),
+        rating: parseFloat(items?.rating),
+        likes: items?.likes,
+        image: items?.image,
+        post_time: moment().format("LLLL"),
+        ingredients: items?.ingredients,
+        description: items?.description,
+        admin_name: items?.admin_name,
+        email: items?.email,
+      };
+      const res = await axiosSec.delete(`/upcommingmeals/${id}`);
+      const posts = await axiosSec.post("/addmeals", item);
+      if (posts.data.insertedId) {
+        toast.success("publish successfully !");
+      }
+    }
     const likes = like + 1;
     const res = await axioscommon.patch(`/upcommingm/${id}`, { likes });
     refetch();
@@ -38,9 +68,9 @@ const UpcomMeal = () => {
 
   return (
     <div classname="my-10">
-      {useron.badge == "silver" ||
-      useron.badge == "gold" ||
-      useron.badge == "platinum" ||
+      {payment.badge == "silver" ||
+      payment.badge == "gold" ||
+      payment.badge == "Platinum" ||
       useron.role == "admin" ? (
         <>
           <div className="grid md:grid-cols-3 gap-3">
@@ -51,7 +81,9 @@ const UpcomMeal = () => {
                   <p>${items?.price} </p>
                   <p className=" flex items-center">
                     <button
-                      onClick={() => handelLike(items?._id, items?.likes)}
+                      onClick={() =>
+                        handelLike(items?._id, items?.likes, items)
+                      }
                       className="btn"
                     >
                       <AiFillLike />

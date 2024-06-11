@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
 // import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import LogingSpiner from "../../Sheare/LogingSpiner";
 
 const ServicMeal = () => {
+  const axioscommon = useAxiosCommon();
   const axiosSec = useAxiosSecqur();
   const {
     data: requst = [],
@@ -16,6 +19,14 @@ const ServicMeal = () => {
       return data;
     },
   });
+  const handelServe = async (id, status) => {
+    const res = await axioscommon.patch(`/requstmealsata/${id}`, { status });
+    if (res.data.modifiedCount > 0) {
+      toast.success("requst delivered succesfully!");
+    }
+
+    refetch();
+  };
 
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
@@ -38,9 +49,18 @@ const ServicMeal = () => {
             {requst.map((req, inx) => (
               <tr key={req._id}>
                 <th>{inx + 1}</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
+                <td>{req?.title} </td>
+                <td>{req?.userEmail}</td>
+                <td>{req?.user}</td>
+                <td>{req?.status}</td>
+                <td>
+                  <button
+                    onClick={() => handelServe(req._id, "delivered")}
+                    className="btn btn-outline btn-primary"
+                  >
+                    serve
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

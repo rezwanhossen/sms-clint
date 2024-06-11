@@ -26,7 +26,9 @@ const PrimeMeal = () => {
             key={bag._id}
           >
             <img className=" w-full h-[250px]" src={bag.badgeImg} alt="" />
-            <p className="text-3xl">Price : $ {bag.price}</p>
+            <p className="text-3xl">
+              Price : $ {bag.price} <sub>/month</sub>{" "}
+            </p>
           </Link>
         ))}
       </div>

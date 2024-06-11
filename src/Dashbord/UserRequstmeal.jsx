@@ -18,7 +18,7 @@ const UserRequstmeal = () => {
   } = useQuery({
     queryKey: ["requst", user?.email],
     queryFn: async () => {
-      const { data } = await axiosSec.get(`/requstmeal?email=${user.email}`);
+      const { data } = await axiosSec.get(`/requstmeals/${user.email}`);
       return data;
     },
   });
@@ -30,10 +30,10 @@ const UserRequstmeal = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Publish!",
+      confirmButtonText: "Yes, delete!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axioscom.delete(`/requstmeal/${id}`);
+        const res = await axiosSec.delete(`/requstmeal/${id}`);
         if (res.data.deletedCount > 0) {
           toast.success("cancel sucessifully");
         }

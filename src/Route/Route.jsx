@@ -7,11 +7,14 @@ import Meals from "../Componente/Meals/Meals";
 import Addmeal from "../Dashbord/AdminPages/Addmeal";
 import AdminProfil from "../Dashbord/AdminPages/AdminProfil";
 import AllMeals from "../Dashbord/AdminPages/AllMeals";
+import AllReviews from "../Dashbord/AdminPages/AllReviews";
 import Allusers from "../Dashbord/AdminPages/Allusers";
 import ServicMeal from "../Dashbord/AdminPages/ServicMeal";
 import Upcommingmeal from "../Dashbord/AdminPages/Upcommingmeal";
 import ViewDeteal from "../Dashbord/AdminPages/ViewDeteal";
+import MyReview from "../Dashbord/MyReview";
 import Payment from "../Dashbord/Payment";
+import Paymenthistory from "../Dashbord/Paymenthistory";
 import UserProfil from "../Dashbord/UserProfil";
 import UserRequstmeal from "../Dashbord/UserRequstmeal";
 import ErrorPage from "../Pages/ErrorPage";
@@ -77,6 +80,14 @@ const router = createBrowserRouter([
         path: "payment/:id",
         element: <Payment></Payment>,
       },
+      {
+        path: "paymenthistory",
+        element: <Paymenthistory></Paymenthistory>,
+      },
+      {
+        path: "myReview",
+        element: <MyReview />,
+      },
       //admin route
       {
         path: "users",
@@ -106,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "servicmeal",
         element: <ServicMeal></ServicMeal>,
+      },
+      {
+        path: "allreviews",
+        element: <AllReviews></AllReviews>,
       },
     ],
   },

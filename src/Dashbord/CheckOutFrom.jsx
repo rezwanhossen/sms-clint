@@ -1,8 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
+import useAxiosCommon from "../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../Hooks/useAxiosSecqur";
 
 const CheckOutFrom = ({ badge }) => {
@@ -10,9 +12,12 @@ const CheckOutFrom = ({ badge }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSec = useAxiosSecqur();
+  const axioscommon = useAxiosCommon();
   const [clientSecret, setclientSecret] = useState();
   const [pro, setpro] = useState(false);
   const price = badge?.price;
+  const badges = badge?.badge;
+
   // console.log(price);
 
   useEffect(() => {
@@ -43,7 +48,7 @@ const CheckOutFrom = ({ badge }) => {
       setpro(false);
       return;
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // console.log("[PaymentMethod]", paymentMethod);
       toast.success("Pay successfully");
     }
     // payment con
@@ -70,7 +75,16 @@ const CheckOutFrom = ({ badge }) => {
         ...badge,
         transactionId: paymentIntent.id,
         data: new Date(),
+        email: user?.email,
+        name: user?.displayName,
       };
+      delete paymentinfo._id;
+
+      try {
+        await axiosSec.post("/payment", paymentinfo);
+      } catch (err) {
+        toast.error(err.message);
+      }
     }
   };
   return (

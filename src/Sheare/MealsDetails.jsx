@@ -33,20 +33,37 @@ const MealsDetails = () => {
     }
   };
 
-  const { data: useron = {} } = useQuery({
-    queryKey: ["useron", user?.email],
+  // const { data: useron = {} } = useQuery({
+  //   queryKey: ["useron", user?.email],
+  //   queryFn: async () => {
+  //     const { data } = await axioscommon.get(`/useron/${user.email}`);
+  //     return data;
+  //   },
+  // });
+
+  const { data: payment = {} } = useQuery({
+    queryKey: ["payment", user?.email],
     queryFn: async () => {
-      const { data } = await axioscommon.get(`/useron/${user.email}`);
+      const { data } = await axioscommon.get(`/payment/${user.email}`);
       return data;
     },
   });
 
-  const handelRequest = async (meal, useron) => {
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["reviews", meal._id],
+    queryFn: async () => {
+      const { data } = await axioscommon.get(`/reviews/${meal._id}`);
+      return data;
+    },
+  });
+  // console.log(reviews);
+
+  const handelRequest = async (meal, payment) => {
     if (
       user &&
-      (useron.badge == "silver" ||
-        useron.badge == "gold" ||
-        useron.badge == "platinum")
+      (payment.badge == "silver" ||
+        payment.badge == "gold" ||
+        payment.badge == "Platinum")
     ) {
       const requstmel = {
         title: meal?.title,
@@ -60,6 +77,45 @@ const MealsDetails = () => {
       if (res.data.insertedId) {
         toast.success("Request successfully !");
       }
+      refetch();
+    } else {
+      naviget("/login");
+    }
+  };
+
+  const addreviews = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const review = form.review.value;
+    const mealtitle = meal.title;
+    const likes = 0;
+    const mealid = meal._id;
+    const email = user?.email;
+    const name = user?.displayName;
+    const reviews = {
+      mealid,
+      mealtitle,
+      likes,
+      review,
+      email,
+      name,
+    };
+    if (user) {
+      const res = await axioscommon.post("/reviews", reviews);
+      if (res.data.insertedId) {
+        toast.success("revies successfilly !");
+      }
+      refetch();
+    } else {
+      naviget("/login");
+    }
+  };
+
+  const handelrevewlike = async (id, like) => {
+    if (user) {
+      const likes = like + 1;
+      const res = await axioscommon.patch(`/reviewLike/${id}`, { likes });
+      refetch();
     } else {
       naviget("/login");
     }
@@ -69,7 +125,7 @@ const MealsDetails = () => {
 
   return (
     <div className="flex justify-center my-10">
-      <div className=" md:w-2/3 mx-auto bg-slate-300 rounded-xl shadow-xl p-7">
+      <div className="w-full md:w-2/3 mx-auto bg-slate-300 rounded-xl shadow-xl p-7">
         <div className=" md:flex gap-4 ">
           <div className=" flex-1 space-y-3">
             <h1 className="text-3xl md:text-5xl font-bold">{meal.title} </h1>
@@ -89,8 +145,32 @@ const MealsDetails = () => {
             <p>
               <b>Distributor name</b> {meal.admin_name}
             </p>
-            <p className="text-2xl">Reviews</p>
+            <p className="text-2xl">Reviews {reviews?.length} </p>
             <div className=" divider"></div>
+            <div>
+              {reviews.length > 0 && (
+                <div className=" mt-2 ">
+                  {reviews.map((rev) => (
+                    <div
+                      key={rev._id}
+                      className="p-2 mt-4 rounded-xl shadow-lg"
+                    >
+                      <p>{rev?.review} </p>
+                      <div className=" divider my-2"></div>
+                      <div className=" flex justify-between">
+                        <p>{rev?.name} </p>
+                        <button
+                          onClick={() => handelrevewlike(rev._id, rev?.likes)}
+                          className=" btn"
+                        >
+                          <AiFillLike /> {rev?.likes}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
           <div className=" flex-1 space-y-3 p-2">
             <p className="text-xl font-semibold"> {meal.post_time}</p>
@@ -114,13 +194,13 @@ const MealsDetails = () => {
               ))} */}
             </p>
             <button
-              onClick={() => handelRequest(meal, useron)}
+              onClick={() => handelRequest(meal, payment)}
               className=" btn btn-outline btn-primary"
             >
               Meal Request
             </button>
             <div className=" my-10">
-              <form className=" space-y-2">
+              <form onSubmit={addreviews} className=" space-y-2">
                 <input
                   type="text"
                   className=" input input-bordered"
