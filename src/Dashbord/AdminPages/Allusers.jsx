@@ -10,17 +10,17 @@ const Allusers = () => {
   const asioxSec = useAxiosSecqur();
   const [search, setsearch] = useState("");
 
-  // const {
-  //   data: users = [],
-  //   isLoading,
-  //   refetch,
-  // } = useQuery({
-  //   queryKey: ["users", search],
-  //   queryFn: async () => {
-  //     const { data } = await asioxSec.get(`/all-users?search=${search}`);
-  //     return data;
-  //   },
-  // });
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["users", search],
+    queryFn: async () => {
+      const { data } = await asioxSec.get(`/all-users?search=${search}`);
+      return data;
+    },
+  });
 
   const handelrol = (id) => {
     asioxSec.patch(`/users/admin/${id}`).then((res) => {
