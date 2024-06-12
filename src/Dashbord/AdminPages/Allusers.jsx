@@ -52,7 +52,7 @@ const Allusers = () => {
 
         <h2 className="text-3xl">Total user {users.length}</h2>
       </div>
-      <div className=" bg-slate-400 p-4 my-6 rouned-md shadow-md ">
+      <div className=" bg-slate-200 p-4 my-6 rouned-md shadow-md ">
         <form onSubmit={handelsearch} className="flex gap-2">
           <input
             type="text"

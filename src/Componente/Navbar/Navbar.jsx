@@ -1,9 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import { IoMdNotifications } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const [isAdmin] = useAdmin();
   const navbarsItem = (
     <>
       <li className="mr-2">
@@ -75,9 +77,19 @@ const Navbar = () => {
                     <li>
                       <a>{user.displayName}</a>
                     </li>
-                    <li>
+                    {user && isAdmin && (
+                      <li>
+                        <Link to="/dashbord/adminHome">Dashboard</Link>
+                      </li>
+                    )}
+                    {user && !isAdmin && (
+                      <li>
+                        <Link to="/dashbord/userHome">Dashboard</Link>
+                      </li>
+                    )}
+                    {/* <li>
                       <Link to="/dashbord">Dashboard</Link>
-                    </li>
+                    </li> */}
                     <li>
                       <button onClick={logout}>Logout</button>
                     </li>

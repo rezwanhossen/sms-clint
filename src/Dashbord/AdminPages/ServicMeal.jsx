@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 // import useAxiosCommon from "../../Hooks/useAxiosCommon";
@@ -8,17 +9,20 @@ import LogingSpiner from "../../Sheare/LogingSpiner";
 const ServicMeal = () => {
   const axioscommon = useAxiosCommon();
   const axiosSec = useAxiosSecqur();
+  const [search, setsearch] = useState("");
   const {
     data: requst = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["requst"],
+    queryKey: ["requst", search],
     queryFn: async () => {
-      const { data } = await axiosSec.get("/allrequstmeal");
+      const { data } = await axiosSec.get(`/all-requstmeals?search=${search}`);
+      // const { data } = await axiosSec.get(`/allrequstmeal`);
       return data;
     },
   });
+
   const handelServe = async (id, status) => {
     const res = await axioscommon.patch(`/requstmealsata/${id}`, { status });
     if (res.data.modifiedCount > 0) {
@@ -28,10 +32,33 @@ const ServicMeal = () => {
     refetch();
   };
 
+  const handelsearch = (e) => {
+    e.preventDefault();
+    const text = e.target.search.value;
+    setsearch(text);
+  };
+
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div className="my-10">
       <h2 className="text-3xl font-bold">All Requst meal</h2>
+
+      <div className=" bg-slate-200 p-4 my-6 rouned-md shadow-md ">
+        <form onSubmit={handelsearch} className="flex gap-2">
+          <input
+            type="text"
+            className=" input input-disabled"
+            name="search"
+            placeholder="type meal title.."
+            id=""
+          />
+          <input
+            type="submit"
+            className="btn btn-outline btn-primary"
+            value="Search"
+          />
+        </form>
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

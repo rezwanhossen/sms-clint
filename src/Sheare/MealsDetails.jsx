@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
 import LogingSpiner from "./LogingSpiner";
 import { AiFillLike } from "react-icons/ai";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { IoMdArrowRoundBack } from "react-icons/io";
 const MealsDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
@@ -49,7 +50,7 @@ const MealsDetails = () => {
     },
   });
 
-  const { data: reviews = [] } = useQuery({
+  const { data: reviews = [], refetch: revrefetch } = useQuery({
     queryKey: ["reviews", meal._id],
     queryFn: async () => {
       const { data } = await axioscommon.get(`/reviews/${meal._id}`);
@@ -110,8 +111,7 @@ const MealsDetails = () => {
         reviecCount: reviecCount,
       });
 
-      refetch();
-      refetch();
+      revrefetch();
     } else {
       naviget("/login");
     }
@@ -121,7 +121,7 @@ const MealsDetails = () => {
     if (user) {
       const likes = like + 1;
       const res = await axioscommon.patch(`/reviewLike/${id}`, { likes });
-      refetch();
+      revrefetch();
     } else {
       naviget("/login");
     }
@@ -140,7 +140,10 @@ const MealsDetails = () => {
 
   return (
     <div className="flex justify-center my-10">
-      <div className="w-full md:w-2/3 mx-auto bg-slate-300 rounded-xl shadow-xl p-7">
+      <div className="w-full md:w-4/5 mx-auto bg-slate-300 rounded-xl shadow-xl p-7">
+        <Link to="/meals" className="btn">
+          <IoMdArrowRoundBack />
+        </Link>
         <div className=" md:flex gap-4 ">
           <div className=" flex-1 space-y-3">
             <h1 className="text-3xl md:text-5xl font-bold">{meal.title} </h1>
@@ -168,7 +171,7 @@ const MealsDetails = () => {
                   {reviews.map((rev) => (
                     <div
                       key={rev._id}
-                      className="p-2 mt-4 rounded-xl shadow-lg"
+                      className="p-2 mt-4 rounded-xl bg-slate-100 shadow-lg"
                     >
                       <p>{rev?.review} </p>
                       <div className=" divider my-2"></div>
@@ -224,6 +227,7 @@ const MealsDetails = () => {
                 />
                 <br />
                 <input
+                  //onClick={() => handelClick(meal._id, reviews)}
                   type="submit"
                   className=" btn btn-primary btn-outline"
                   value="Add Review"

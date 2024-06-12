@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import LogingSpiner from "../../Sheare/LogingSpiner";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ViewDeteal = () => {
   const { id } = useParams();
@@ -13,11 +14,16 @@ const ViewDeteal = () => {
       return data;
     },
   });
-  console.log(meal);
+
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div className=" flex justify-center">
       <div className=" md:w-2/3 mx-auto bg-slate-300 rounded-xl shadow-xl p-7">
+        <div className=" p-1">
+          <Link to="/dashbord/allmeals" className=" btn">
+            <IoMdArrowRoundBack />
+          </Link>
+        </div>
         <div className="md:flex gap-3">
           <div className=" flex-1 space-y-3">
             <h2 className="text-2xl font-bold">{meal.title} </h2>

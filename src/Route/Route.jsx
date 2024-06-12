@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
+import Adminrouter from "../Componente/Firbase/Adminrouter";
 import PrivateRout from "../Componente/Firbase/PrivateRout";
 import Home from "../Componente/Home";
 import Login from "../Componente/LoginReg/Login";
 import Register from "../Componente/LoginReg/Register";
 import Meals from "../Componente/Meals/Meals";
 import Addmeal from "../Dashbord/AdminPages/Addmeal";
+import AdminHome from "../Dashbord/AdminPages/AdminHome/AdminHome";
 import AdminProfil from "../Dashbord/AdminPages/AdminProfil";
 import AllMeals from "../Dashbord/AdminPages/AllMeals";
 import AllReviews from "../Dashbord/AdminPages/AllReviews";
@@ -15,6 +17,7 @@ import ViewDeteal from "../Dashbord/AdminPages/ViewDeteal";
 import MyReview from "../Dashbord/MyReview";
 import Payment from "../Dashbord/Payment";
 import Paymenthistory from "../Dashbord/Paymenthistory";
+import UserHome from "../Dashbord/UserHome/UserHome";
 import UserProfil from "../Dashbord/UserProfil";
 import UserRequstmeal from "../Dashbord/UserRequstmeal";
 import ErrorPage from "../Pages/ErrorPage";
@@ -69,6 +72,10 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
         path: "userpro",
         element: <UserProfil></UserProfil>,
       },
@@ -90,37 +97,79 @@ const router = createBrowserRouter([
       },
       //admin route
       {
+        path: "adminHome",
+        element: (
+          <Adminrouter>
+            {" "}
+            <AdminHome></AdminHome>
+          </Adminrouter>
+        ),
+      },
+      {
         path: "users",
-        element: <Allusers></Allusers>,
+        element: (
+          <Adminrouter>
+            {" "}
+            <Allusers></Allusers>
+          </Adminrouter>
+        ), //<Adminrouter></Adminrouter>
       },
 
       {
         path: "addmeal",
-        element: <Addmeal></Addmeal>,
+        element: (
+          <Adminrouter>
+            <Addmeal></Addmeal>
+          </Adminrouter>
+        ),
       },
       {
         path: "upcommingmeal",
-        element: <Upcommingmeal></Upcommingmeal>,
+        element: (
+          <Adminrouter>
+            <Upcommingmeal></Upcommingmeal>
+          </Adminrouter>
+        ),
       },
       {
         path: "allmeals",
-        element: <AllMeals></AllMeals>,
+        element: (
+          <Adminrouter>
+            <AllMeals></AllMeals>
+          </Adminrouter>
+        ),
       },
       {
         path: "vievdetial/:id",
-        element: <ViewDeteal></ViewDeteal>,
+        element: (
+          <Adminrouter>
+            <ViewDeteal></ViewDeteal>
+          </Adminrouter>
+        ),
       },
       {
         path: "adminProfil",
-        element: <AdminProfil></AdminProfil>,
+        element: (
+          <Adminrouter>
+            <AdminProfil></AdminProfil>
+          </Adminrouter>
+        ),
       },
       {
         path: "servicmeal",
-        element: <ServicMeal></ServicMeal>,
+        element: (
+          <Adminrouter>
+            <ServicMeal></ServicMeal>
+          </Adminrouter>
+        ),
       },
       {
         path: "allreviews",
-        element: <AllReviews></AllReviews>,
+        element: (
+          <Adminrouter>
+            <AllReviews></AllReviews>
+          </Adminrouter>
+        ),
       },
     ],
   },

@@ -75,14 +75,15 @@ const AuthProvider = ({ children }) => {
         axiosCommon.post("/jwt", userinfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
+            setloding(false);
           }
         });
 
         saveUser(user);
       } else {
         localStorage.removeItem("access-token");
+        setloding(false);
       }
-      setloding(false);
     });
     return () => {
       return unsubscribe();
