@@ -7,6 +7,8 @@ import LogingSpiner from "../Sheare/LogingSpiner";
 // import useAxiosSecqur from "../Hooks/useAxiosSecqur";
 // import { Elements } from "@stripe/react-stripe-js";
 import CheckOutFrom from "./CheckOutFrom";
+import { Helmet } from "react-helmet-async";
+
 const stripePromise = loadStripe(import.meta.env.VITE_pymeny);
 
 const Payment = () => {
@@ -24,6 +26,9 @@ const Payment = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>users || Payment</title>
+      </Helmet>
       <h1 className="text3xl md:text-5xl font-bold"> Payment</h1>
       <div className="my-8">
         <Elements stripe={stripePromise}>

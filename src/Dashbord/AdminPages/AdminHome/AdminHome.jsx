@@ -8,6 +8,7 @@ import { FaUsers } from "react-icons/fa6";
 import { MdNoMeals } from "react-icons/md";
 import { MdOutlineBorderColor } from "react-icons/md";
 import { MdOutlineRateReview } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 const AdminHome = () => {
   const { user } = useAuth();
@@ -24,6 +25,9 @@ const AdminHome = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin || Home</title>
+      </Helmet>
       <h2 className="text-2xl font-bold">
         hi, Welcome{" "}
         <span>{user?.displayName ? user?.displayName : "Back"} </span>

@@ -7,6 +7,8 @@ import NoDataHeader from "../../Sheare/NoDataHeader";
 import moment from "moment";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
+
 const UpcomMeal = () => {
   const { user } = useAuth();
   const axiosSec = useAxiosSecqur();
@@ -68,6 +70,9 @@ const UpcomMeal = () => {
 
   return (
     <div classname="my-10">
+      <Helmet>
+        <title>All Upcomming Meals</title>
+      </Helmet>
       {payment.badge == "silver" ||
       payment.badge == "gold" ||
       payment.badge == "Platinum" ||

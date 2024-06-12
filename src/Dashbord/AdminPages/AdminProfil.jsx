@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 // import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
+import { Helmet } from "react-helmet-async";
 
 const AdminProfil = () => {
   const { user } = useAuth();
@@ -16,6 +17,9 @@ const AdminProfil = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin || profile</title>
+      </Helmet>
       <div className=" md:w-2/4 mx-auto">
         <div className=" flex justify-center">
           <div className="space-y-3">

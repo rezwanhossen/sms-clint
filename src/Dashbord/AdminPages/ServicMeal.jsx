@@ -5,6 +5,7 @@ import useAxiosCommon from "../../Hooks/useAxiosCommon";
 // import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import LogingSpiner from "../../Sheare/LogingSpiner";
+import { Helmet } from "react-helmet-async";
 
 const ServicMeal = () => {
   const axioscommon = useAxiosCommon();
@@ -41,6 +42,9 @@ const ServicMeal = () => {
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>Admin || service meals</title>
+      </Helmet>
       <h2 className="text-3xl font-bold">All Requst meal</h2>
 
       <div className=" bg-slate-200 p-4 my-6 rouned-md shadow-md ">

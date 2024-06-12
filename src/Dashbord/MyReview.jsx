@@ -8,6 +8,7 @@ import useAuth from "../Hooks/useAuth";
 
 import useAxiosSecqur from "../Hooks/useAxiosSecqur";
 import LogingSpiner from "../Sheare/LogingSpiner";
+import { Helmet } from "react-helmet-async";
 
 const MyReview = () => {
   const asiosSec = useAxiosSecqur();
@@ -46,6 +47,9 @@ const MyReview = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>user || reviews</title>
+      </Helmet>
       <h2 className="text-3xl font-bold">My Revious</h2>
       <div className="mt-5">
         <div className="overflow-x-auto">

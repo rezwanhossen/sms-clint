@@ -7,6 +7,7 @@ import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import LogingSpiner from "../../Sheare/LogingSpiner";
 import AddUpcoming from "./AddUpcoming";
+import { Helmet } from "react-helmet-async";
 
 const Upcommingmeal = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -62,6 +63,9 @@ const Upcommingmeal = () => {
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div>
+      <Helmet>
+        <title>Admin || add Upcomming meal & add Upcomming meal </title>
+      </Helmet>
       <div className=" md:flex justify-between items-center">
         <h2 className="text-2xl font-bold">Upcomming Meals</h2>
         <div>

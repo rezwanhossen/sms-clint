@@ -6,6 +6,7 @@ import useAuth from "../Hooks/useAuth";
 // import useAxiosCommon from "../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../Hooks/useAxiosSecqur";
 import LogingSpiner from "../Sheare/LogingSpiner";
+import { Helmet } from "react-helmet-async";
 
 const UserRequstmeal = () => {
   const { user } = useAuth();
@@ -44,6 +45,9 @@ const UserRequstmeal = () => {
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div>
+      <Helmet>
+        <title>user || requsted meal</title>
+      </Helmet>
       <h2 className="text-3xl font-bold"> Requsted meals</h2>
 
       <div className="overflow-x-auto">

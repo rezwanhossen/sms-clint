@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
+import { Helmet } from "react-helmet-async";
+
 import moment from "moment";
 const imgHosting_api = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMGBB_key
@@ -57,6 +59,9 @@ const Addmeal = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Admin || Add meals</title>
+      </Helmet>
       <h2 className="text-3xl font-bold my-5 text-center">Add Meal</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid md:grid-cols-2 gap-3">

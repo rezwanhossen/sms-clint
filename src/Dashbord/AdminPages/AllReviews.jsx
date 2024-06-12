@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import LogingSpiner from "../../Sheare/LogingSpiner";
+import { Helmet } from "react-helmet-async";
 
 const AllReviews = () => {
   const axiosSec = useAxiosSecqur();
@@ -42,6 +43,9 @@ const AllReviews = () => {
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div>
+      <Helmet>
+        <title>Admin || All Reviews </title>
+      </Helmet>
       <div className="md:flex justify-around">
         <h2 className="text-3xl hont-bold">All Reviews</h2>
         <h2 className="text-3xl hont-bold">

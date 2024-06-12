@@ -1,5 +1,7 @@
 import useAuth from "../Hooks/useAuth";
 import { LuBadgeCheck } from "react-icons/lu";
+import { Helmet } from "react-helmet-async";
+
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
 const UserProfil = () => {
@@ -22,6 +24,9 @@ const UserProfil = () => {
 
   return (
     <div className=" md:w-2/4 mx-auto">
+      <Helmet>
+        <title>User || profile</title>
+      </Helmet>
       <div className=" flex justify-center">
         <div className="space-y-3">
           <img

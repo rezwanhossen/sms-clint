@@ -8,6 +8,8 @@ import useAxiosSecqur from "../../Hooks/useAxiosSecqur";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
+
 // import { useMemo } from "react";
 
 const AllMeals = () => {
@@ -62,6 +64,9 @@ const AllMeals = () => {
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div>
+      <Helmet>
+        <title>Admin || All Meals</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table overflow-x-auto">
           {/* head */}

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { FaUser } from "react-icons/fa";
 import { useState } from "react";
 // import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import { Helmet } from "react-helmet-async";
 
 const Allusers = () => {
   const asioxSec = useAxiosSecqur();
@@ -47,6 +48,9 @@ const Allusers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin || all users</title>
+      </Helmet>
       <div className=" md:flex justify-between">
         <h2 className="text-3xl">All users</h2>
 

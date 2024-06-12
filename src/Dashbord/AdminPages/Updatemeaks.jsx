@@ -5,6 +5,8 @@ import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import LogingSpiner from "../../Sheare/LogingSpiner";
+import { Helmet } from "react-helmet-async";
+
 import toast from "react-hot-toast";
 const imgHosting_api = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMGBB_key
@@ -62,9 +64,9 @@ const Updatemeaks = () => {
         description,
         post_time: moment().format("LLLL"),
       };
-    //   const menuRes = await axiosSec.put(`/updatemeals/${id}`, mealItem);
-    //   console.log(mealItem);
-      
+      //   const menuRes = await axiosSec.put(`/updatemeals/${id}`, mealItem);
+      //   console.log(mealItem);
+
       refetch();
     }
   };
@@ -72,6 +74,9 @@ const Updatemeaks = () => {
   if (isLoading) return <LogingSpiner></LogingSpiner>;
   return (
     <div>
+      <Helmet>
+        <title>Admin || update Upcomming meal </title>
+      </Helmet>
       <div>
         <h2 className="text-3xl font-bold my-5 text-center">Add Meal</h2>
         <form onSubmit={handleSubmit(onSubmit)}>

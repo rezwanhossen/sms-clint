@@ -4,6 +4,7 @@ import LogingSpiner from "../../Sheare/LogingSpiner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import MealsCard from "../../Sheare/MealsCard";
+import { Helmet } from "react-helmet-async";
 
 const Meals = () => {
   const [filter, setCategoryFilter] = useState("");
@@ -35,6 +36,9 @@ const Meals = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All  meals</title>
+      </Helmet>
       <div className="mt-5 bg-lime-600 p-4 space-y-3 md:flex  justify-between items-center">
         <form onSubmit={handelsearch} className="flex gap-2">
           <input
