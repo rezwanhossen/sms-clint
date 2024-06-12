@@ -128,12 +128,8 @@ const MealsDetails = () => {
   };
 
   // const handelClick = async (id, reviews) => {
-  //   const reviecCount = reviews?.length + 1;
-  //   const res = await axioscommon.patch(`/reviusCount/${id}`, {
-  //     reviecCount: reviecCount,
-  //   });
-  //   console.log(res);
-  //   refetch();
+  //   const reviewscount = reviews?.length + 1;
+  //   const res = await axioscommon.patch(`/reviusCount/${id}`, { reviewscount });
   // };
 
   if (isLoading) return <LogingSpiner></LogingSpiner>;
@@ -207,9 +203,6 @@ const MealsDetails = () => {
               <li>{meal.ingredients?.itm2}</li>
               <li>{meal.ingredients?.itm3}</li>
               <li>{meal.ingredients?.itm4}</li>
-              {/* {meal.ingredients.map((itm, inx) => (
-                <li key={inx}> {itm}</li>
-              ))} */}
             </p>
             <button
               onClick={() => handelRequest(meal, payment)}
@@ -227,7 +220,6 @@ const MealsDetails = () => {
                 />
                 <br />
                 <input
-                  //onClick={() => handelClick(meal._id, reviews)}
                   type="submit"
                   className=" btn btn-primary btn-outline"
                   value="Add Review"

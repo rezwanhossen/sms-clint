@@ -27,6 +27,7 @@ const Addmeal = () => {
       image,
       description,
     } = data;
+
     const imageFile = { image: data.image[0] };
     const res = await axiospub.post(imgHosting_api, imageFile, {
       headers: {
@@ -125,12 +126,14 @@ const Addmeal = () => {
           </div>
 
           {/* <div>
-            <label> reviews</label>
+            <label> reviewscount</label>
             <input
-              type="text"
+              type="number"
               className=" input input-disabled w-full"
               name=" review"
-              {...register("reviews")}
+              defaultValue={0}
+              disabled
+              {...register("reviewscount")}
               id=""
               required
             />
