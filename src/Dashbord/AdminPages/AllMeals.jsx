@@ -90,7 +90,7 @@ const AllMeals = () => {
                   <button onClick={() => handeldelet(meal._id)} className="btn">
                     <MdDelete></MdDelete>{" "}
                   </button>
-                  <Link className="btn">
+                  <Link to={`/dashbord/updatemeal/${meal._id}`} className="btn">
                     <FaEdit />{" "}
                   </Link>
                 </td>

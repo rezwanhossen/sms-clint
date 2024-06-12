@@ -125,20 +125,6 @@ const Addmeal = () => {
             />
           </div>
 
-          {/* <div>
-            <label> reviewscount</label>
-            <input
-              type="number"
-              className=" input input-disabled w-full"
-              name=" review"
-              defaultValue={0}
-              disabled
-              {...register("reviewscount")}
-              id=""
-              required
-            />
-          </div> */}
-
           <div>
             <label>ingredients</label>
             <div className="grid md:grid-cols-2 gap-2">

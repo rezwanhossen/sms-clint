@@ -13,6 +13,7 @@ import AllReviews from "../Dashbord/AdminPages/AllReviews";
 import Allusers from "../Dashbord/AdminPages/Allusers";
 import ServicMeal from "../Dashbord/AdminPages/ServicMeal";
 import Upcommingmeal from "../Dashbord/AdminPages/Upcommingmeal";
+import Updatemeaks from "../Dashbord/AdminPages/Updatemeaks";
 import ViewDeteal from "../Dashbord/AdminPages/ViewDeteal";
 import MyReview from "../Dashbord/MyReview";
 import Payment from "../Dashbord/Payment";
@@ -120,6 +121,14 @@ const router = createBrowserRouter([
         element: (
           <Adminrouter>
             <Addmeal></Addmeal>
+          </Adminrouter>
+        ),
+      },
+      {
+        path: "updatemeal/:id",
+        element: (
+          <Adminrouter>
+            <Updatemeaks></Updatemeaks>
           </Adminrouter>
         ),
       },

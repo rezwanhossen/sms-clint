@@ -92,7 +92,7 @@ const UpcomMeal = () => {
                   </p>
                 </div>
                 <h2 className="text-2xl font-bold">{items?.title} </h2>
-                <p>{items?.description} </p>
+                <p>{items?.description.slice(0, 50)}.... </p>
               </div>
             ))}
           </div>
